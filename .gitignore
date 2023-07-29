@@ -23,3 +23,6 @@ mono_crash.*.json
 
 # Exclude bin folder for GDExtension
 /bin/
+
+# Exclude addons folder for addons testing
+/addons
