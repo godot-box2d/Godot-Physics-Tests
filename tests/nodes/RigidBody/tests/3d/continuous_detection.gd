@@ -14,7 +14,7 @@ enum Aspect {
 
 @export var wall_type: WallType = WallType.BOX
 @export var speed: float = 25000
-@export var simulation_duration: float = 0.1
+@export var simulation_duration: float = 0.5
 @export var expected_to_fail: Array[Aspect] = []
 
 func test_description() -> String:

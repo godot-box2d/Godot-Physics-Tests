@@ -9,25 +9,26 @@ script = ExtResource("1_eq855")
 [node name="maximum_bodies_before_low_fps_capsule-capsule" parent="." instance=ExtResource("3_tl4jl")]
 position = Vector2(-4, 7)
 shape1 = 5
+SPAWN_DELAY = 0.05
 shape2 = 5
 
 [node name="maximum_bodies_before_low_fps_polygon-polygon" parent="." instance=ExtResource("3_tl4jl")]
 position = Vector2(-4, 7)
 shape1 = 7
+SPAWN_DELAY = 0.05
 shape2 = 7
 
 [node name="maximum_bodies_before_low_fps_circle-circle" parent="." instance=ExtResource("3_tl4jl")]
 position = Vector2(-4, 7)
-shape1 = 3
-shape2 = 3
+SPAWN_DELAY = 0.05
 
 [node name="maximum_bodies_before_low_fps_convex-convex" parent="." instance=ExtResource("3_tl4jl")]
 position = Vector2(-4, 7)
-shape1 = 6
-shape2 = 6
+SPAWN_DELAY = 0.05
 
 [node name="maximum_bodies_before_low_fps_rect-rect" parent="." instance=ExtResource("3_tl4jl")]
 position = Vector2(-4, 7)
+SPAWN_DELAY = 0.05
 
 [node name="HFlowContainer" type="HFlowContainer" parent="."]
 offset_right = 40.0

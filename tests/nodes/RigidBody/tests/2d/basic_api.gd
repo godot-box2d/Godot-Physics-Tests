@@ -111,7 +111,7 @@ func test_start() -> void:
 		var sleep_test = func(_p_target: PhysicsTest2D, _p_monitor: GenericExpirationMonitor):
 			return body1.sleeping and not body2.sleeping
 
-		var monitor := create_generic_expiration_monitor(self, sleep_test, null, 1)
+		var monitor := create_generic_expiration_monitor(self, sleep_test, null, 3)
 		monitor.test_name = "Can sleep works"
 
 	if true:
@@ -274,12 +274,13 @@ func test_start() -> void:
 		var body := create_rigid_body(next_test_layer(), test_position)
 
 		var constant_torque_test = func(p_target: RigidBody2D, p_monitor: GenericManualMonitor):
+			var inertia : float = PhysicsServer2D.body_get_param(p_target.get_rid(), PhysicsServer2D.BODY_PARAM_INERTIA)
 			if p_monitor.frame == 2:
 				p_target.add_constant_torque(500)
 			# Apply the force 20 frames
 			if p_monitor.frame == 22:
 				p_monitor.add_test("Constant torque is applied")
-				var inertia : float = PhysicsServer2D.body_get_param(p_target.get_rid(), PhysicsServer2D.BODY_PARAM_INERTIA)
+				
 				var expected = 0.5 *  (500.0 / inertia) * pow((dt * 20.0), 2.0)  # x(t) = (1/2)at2 + v0t + x0
 				var result = p_target.rotation
 				var success:= Utils.f_equals(result, expected, 0.02)

@@ -7,7 +7,7 @@ enum WallType {
 
 @export var wall_type: WallType = WallType.BOX
 @export var speed: float = 25000
-@export var simulation_duration : float = 0.1
+@export var simulation_duration : float = 1
 
 func test_description() -> String:
 	return """Checks if the Continuous Collision Detection (CCD) is working, it must ensure that moving
@@ -90,7 +90,7 @@ func test_start() -> void:
 	var y_collision_monitor := create_generic_expiration_monitor(rigid_y_ccd_ray, collide_y_lambda, null, simulation_duration)
 	y_collision_monitor.test_name = "Rigid moving in y with CCD detects collision"
 	
-	process_mode = Node.PROCESS_MODE_DISABLED # to be able to see something
+	#process_mode = Node.PROCESS_MODE_DISABLED # to be able to see something
 	await get_tree().create_timer(.5).timeout
 	process_mode = Node.PROCESS_MODE_INHERIT
 

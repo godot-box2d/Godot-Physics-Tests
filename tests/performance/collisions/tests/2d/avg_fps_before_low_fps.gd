@@ -7,6 +7,7 @@ extends PhysicsPerformanceTest2D
 @export var NB_ITERATION := 3 # The number of times the test should be run 
 @export var NUMBER_BODIES_PER_SPAWN := 20
 @export var SPAWN_DELAY := 0.25
+@export var MAX_CIRCLES := 10000
 var MAXIMUM_STEP := 25 # The size of the table that records the steps.
 
 var timer : Timer
@@ -39,7 +40,7 @@ func test_start() -> void:
 	add_child(label_number)
 	
 	# ground
-	add_child(PhysicsTest2D.get_static_body_with_collision_shape(Rect2(BOTTOM_LEFT - Vector2(5000, 100), Vector2(Global.WINDOW_SIZE.x + 5000, 100)), TestCollisionShape.RECTANGLE, true))
+	add_child(PhysicsTest2D.get_static_body_with_collision_shape(Rect2(BOTTOM_LEFT - Vector2(5000, 100), Vector2(Global.WINDOW_SIZE.x + 10000, 100)), TestCollisionShape.RECTANGLE, true))
 	timer = Timer.new()
 	timer.wait_time = SPAWN_DELAY
 	timer.process_callback =Timer.TIMER_PROCESS_PHYSICS
@@ -97,6 +98,8 @@ func clean() -> void:
 	bodies.clear()
 		
 func spawn_body() -> void:
+	if bodies.size() > MAX_CIRCLES:
+		return
 	var offset = (Global.WINDOW_SIZE.x - 100) / 19
 	swap = not swap
 	for i in range(NUMBER_BODIES_PER_SPAWN):
@@ -104,6 +107,7 @@ func spawn_body() -> void:
 		var body = _get_rigid_body(TOP_LEFT + Vector2(50 + randf() * 25 + i * offset, 0), shape)
 		bodies.append(body)
 		add_child(body)
+		RapierPhysicsServer2D.body_set_state_sync_callback(body.get_rid(), Callable())
 	
 	if bodies.size() % NB_BODY_FOR_ONE_STEP == 0:
 		assert(array_index >= 0 and array_index < avg_result_arr.size()) # If this assertion fails, increase MAXIMUM_STEP

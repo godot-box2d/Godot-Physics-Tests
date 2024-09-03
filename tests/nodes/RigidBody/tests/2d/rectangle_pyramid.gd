@@ -1,10 +1,11 @@
 extends PhysicsUnitTest2D
 
-@export var height := 10
-@export var box_size := Vector2(25.0, 25.0)
-@export var box_spacing :=  Vector2(0, 0)
-var simulation_duration := 2
-var size_boundary := 20
+@export var height := 40
+@export var box_size := Vector2(100, 100)
+#@export var box_spacing :=  Vector2(0.001, 0.001)
+@export var box_spacing :=  Vector2(0,0)
+var simulation_duration := 6
+var size_boundary := 2
 var tolerance := Vector2(2.5, 0)
 
 var bodies := []
@@ -61,7 +62,6 @@ func create_pyramid():
 		bodies.append(row_node)
 
 		pos_x = -0.5 * (num_boxes - 1) * (box_size.x + box_spacing.x) + Global.WINDOW_SIZE.x/2
-
 		for box_index in range(num_boxes):
 			var box = get_rigid_body()
 			box.position = Vector2(pos_x, 0.0)

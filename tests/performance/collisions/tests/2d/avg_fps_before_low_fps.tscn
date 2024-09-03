@@ -1,6 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://d32ame83cs40t"]
+[gd_scene load_steps=6 format=4 uid="uid://d32ame83cs40t"]
 
 [ext_resource type="Script" path="res://tests/performance/collisions/tests/2d/avg_fps_before_low_fps.gd" id="1_ov27a"]
+[ext_resource type="Texture2D" uid="uid://cv17s0qjrqj16" path="res://addons/godot-rapier3d/Fluid3D.svg" id="2_nsld0"]
+[ext_resource type="Script" path="res://tests/performance/collisions/tests/2d/rigidbody_2d_renderer.gd" id="3_y475d"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lyk3x"]
+_surfaces = [{
+"2d": true,
+"aabb": AABB(-12.2, -16, 0, 27, 32, 0),
+"attribute_data": PackedByteArray("AABQPwAAYD5mZgY/AAAAAAAA0D4AAAAAAADQPmZmJj3NzDw+AADAPjMz8z0AAMA+AAAgPpqZST8AACA+MzNfP2Zmnj4AAIA/ZmY2PwAAgD9mZk4/AABoP83MXD8AAGg/mpllPwAAQD9mZnY/AABAPwAAUD+amZk+"),
+"format": 34393296913,
+"index_count": 39,
+"index_data": PackedByteArray("DgANAAwADAALAAoACgAJAAgACAAHAAYABgAFAAQAAwACAAEAAQAAAA4ADgAMAAoACgAIAAYABgAEAAMAAwABAA4ADgAKAAYABgADAA4A"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 15,
+"vertex_data": PackedByteArray("AAAgQQAAEMHAzEw/AACAwQAAQMAAAIDBAABAwDMza8GamSHBAACAwDMzQ8EAAIDAAAAwwTQzE0EAADDBZmY+QTQzw8AAAIBBmJnZQAAAgEHMzBxBAABQQZqZOUEAAFBBNDNLQQAAAEHMzGxBAAAAQQAAIEHMzMzA")
+}]
+
+[sub_resource type="MultiMesh" id="MultiMesh_7wv3d"]
+instance_count = 1
+mesh = SubResource("ArrayMesh_lyk3x")
+buffer = PackedFloat32Array(6, 65, 1, 1, 1, 0, 0.107143, 1)
 
 [node name="maximum_bodies_before_low_fps" type="Node2D"]
 script = ExtResource("1_ov27a")
+shape1 = 3
+NB_ITERATION = 1
+NUMBER_BODIES_PER_SPAWN = 30
+SPAWN_DELAY = 0.1
+MAX_CIRCLES = 15000
+
+[node name="MultiMeshInstance2D" type="MultiMeshInstance2D" parent="."]
+multimesh = SubResource("MultiMesh_7wv3d")
+texture = ExtResource("2_nsld0")
+script = ExtResource("3_y475d")

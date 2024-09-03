@@ -1,10 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://f833p245gj24"]
+[gd_scene load_steps=6 format=3 uid="uid://f833p245gj24"]
 
 [ext_resource type="Script" path="res://tests/performance/collisions/tests/3d/convex_fps_performance.gd" id="1_k6d6r"]
+[ext_resource type="Script" path="res://tests/performance/collisions/tests/3d/multi_mesh_instance_3d.gd" id="2_wvhfq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fak8f"]
+size = Vector3(1000, 1, 1000)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4iqeg"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_hx5rj"]
+transform_format = 1
+mesh = SubResource("BoxMesh_4iqeg")
 
 [node name="convex_fps_performance" type="Node3D"]
 script = ExtResource("1_k6d6r")
-shape2 = 99
+shape1 = 2
+shape2 = 3
+NB_ITERATION = 1
+NUMBER_BODIES_PER_SPAWN = 10
+SPAWN_DELAY = 0.07
+GROUND_TYPE = 0
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 19.6537, 14.4719)
@@ -13,3 +28,13 @@ current = true
 [node name="CsgBox3d" type="CSGBox3D" parent="."]
 visible = false
 size = Vector3(50, 1, 50)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.84434, 0)
+shape = SubResource("BoxShape3D_fak8f")
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+multimesh = SubResource("MultiMesh_hx5rj")
+script = ExtResource("2_wvhfq")

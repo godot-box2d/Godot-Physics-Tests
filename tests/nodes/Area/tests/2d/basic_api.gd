@@ -61,6 +61,7 @@ func test_start() -> void:
 	area_center_left.monitoring = true
 	area_center_left.monitorable = false
 	
+	
 	var checks_point = func(_p_target: PhysicsUnitTest2D, p_monitor: GenericManualMonitor):
 		if p_monitor.frame == 2:
 			if true: # limit the scope
@@ -226,4 +227,3 @@ func add_area(p_position: Vector2, p_add_child := true) -> Area2D:
 	if p_add_child:
 		add_child(area)
 	return area
-

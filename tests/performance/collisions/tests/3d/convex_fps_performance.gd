@@ -73,6 +73,8 @@ func test_start() -> void:
 	super() # launch the test
 
 func _physics_process(_delta: float) -> void:
+	
+	var space = get_viewport().world_3d.space
 	label_number.text = "Bodies: %d" % bodies.size() 
 	label_number.text += "\nIteration n° %d" % iteration 
 	
@@ -123,6 +125,8 @@ func clean() -> void:
 	bodies.clear()
 		
 func spawn_body() -> void:
+	if bodies.size() > 7000:
+		return;
 	if _warming:
 		return
 	swap = not swap
@@ -133,9 +137,12 @@ func spawn_body() -> void:
 		var offset = index if even else -index
 		var body = RigidBody3D.new()
 		body.add_child(PhysicsTest3D.get_default_collision_shape(shape))
-		body.position = Vector3(offset, 20, 0)
+		body.position = Vector3(offset + randf(), 20 + randf(), randf())
+		
 		bodies.append(body)
 		add_child(body)
+		RapierPhysicsServer3D.body_set_state_sync_callback(body.get_rid(), Callable())
+		var space = get_viewport().world_3d.space
 
 	if bodies.size() % NB_BODY_FOR_ONE_STEP == 0:
 		assert(array_index >= 0 and array_index < avg_result_arr.size()) # If this assertion fails, increase MAXIMUM_STEP

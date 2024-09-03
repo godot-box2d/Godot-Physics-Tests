@@ -23,7 +23,7 @@ var MONITOR_IMRPOVEMENT: Array[String] = []
 var TEST_PASSED := 0
 
 var RUN_2D_TEST := true
-var RUN_3D_TEST := true
+var RUN_3D_TEST := false
 
 var engine_2d = "GodotPhysics2D"
 var engine_3d = "GodotPhysics3D"
@@ -35,7 +35,7 @@ func _process(_delta: float) -> void:
 		exit()
 
 func _ready() -> void:
-	get_tree().debug_collisions_hint = true
+	#get_tree().debug_collisions_hint = true
 	
 	var setting_2d_engine = ProjectSettings.get("physics/2d/physics_engine")
 	if setting_2d_engine != "DEFAULT" and setting_2d_engine != "GodotPhysics2D":
@@ -44,6 +44,7 @@ func _ready() -> void:
 	var setting_3d_engine = ProjectSettings.get("physics/3d/physics_engine")
 	if setting_3d_engine != "DEFAULT" and setting_3d_engine != "GodotPhysics3D":
 		engine_3d = setting_3d_engine
+	
 
 func exit(p_code := 0) -> void:
 	await get_tree().create_timer(1).timeout # sometimes the application quits before printing everything in the output

@@ -22,4 +22,3 @@ func _physics_process(_delta):
 			# step once
 			get_tree().paused = false
 			step_once = true
-

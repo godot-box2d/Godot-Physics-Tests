@@ -59,6 +59,8 @@ func create_rigid_body(p_layer := 1, p_report_contact := 20) -> RigidBody2D:
 	player.max_contacts_reported = p_report_contact
 	player.collision_mask = 0
 	player.collision_layer = 0
+	player.physics_material_override = PhysicsMaterial.new()
+	player.physics_material_override.friction = 1
 	player.set_collision_mask_value(p_layer, true)
 	add_child(player)
 	player.apply_force(Vector2(speed, 0))

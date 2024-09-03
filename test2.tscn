@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://ds62xaka3633s"]
+
+[ext_resource type="Script" path="res://collision_polygon_2d.gd" id="1_d3djc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yl0te"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xw3xv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_626jd"]
+size = Vector2(113, 63.9335)
+
+[node name="Test2" type="Node2D"]
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+position = Vector2(-22, 16)
+gravity_scale = 0.0
+constant_force = Vector2(100, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
+rotation = 8.47681
+shape = SubResource("CapsuleShape2D_yl0te")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 119)
+shape = SubResource("WorldBoundaryShape2D_xw3xv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(74, 29)
+rotation = -1.55737
+shape = SubResource("RectangleShape2D_626jd")
+one_way_collision = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, 61)
+zoom = Vector2(3, 3)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+position = Vector2(-53, -1)
+polygon = PackedVector2Array(-28, 10, -15, -5, 2, -24)
+script = ExtResource("1_d3djc")
+
+[node name="Fluid2D" type="Fluid2D" parent="."]
+effects = Array[Resource]([null])
